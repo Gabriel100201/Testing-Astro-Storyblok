@@ -1,0 +1,17 @@
+---
+import { useStoryblokApi } from '@storyblok/astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import StoryGrid from '../components/StoryGrid.astro'
+
+const storyblokApi = useStoryblokApi()
+const { data } = await storyblokApi.get('cdn/stories', {
+  version: 'draft',
+  starts_with: 'home', // Puedes cambiarlo según la ruta donde guardes tus stories
+})
+
+const stories = data.stories
+---
+
+<BaseLayout>
+  <StoryGrid stories={stories} />
+</BaseLayout>
